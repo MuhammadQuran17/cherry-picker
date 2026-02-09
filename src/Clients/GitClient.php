@@ -14,7 +14,7 @@ class GitClient
 
     public function getInitialBranchName(): string
     {
-        return trim(shell_exec("git rev-parse --abbrev-ref HEAD"));
+        return $this->shell->runShellExec("git rev-parse --abbrev-ref HEAD");
     }
 
     public function prepare(): void

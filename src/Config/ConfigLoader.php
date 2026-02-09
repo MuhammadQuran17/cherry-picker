@@ -51,6 +51,9 @@ class ConfigLoader
         $configFiles = glob($configPath . '/*.php');
 
         foreach ($configFiles as $file) {
+            // Skip this class file to avoid redeclaration
+            if (str_contains($file, 'ConfigLoader.php')) continue;
+
             $configName = basename($file, '.php');
             $this->config[$configName] = require $file;
         }

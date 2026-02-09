@@ -2,18 +2,18 @@
 
 ## Installation & Setup
 
+### 0. Clone this Repo
+
+```bash
+git clone LINK_TO_REPO
+cd cherry-picker
+```
+
 ### 1. Install Dependencies
 
 ```bash
 composer install
 ```
-
-This will install all required packages:
-- guzzlehttp/guzzle (HTTP client)
-- symfony/process (Process execution)
-- laravel/prompts (CLI prompts)
-- vlucas/phpdotenv (Environment variables)
-- pimple/pimple (Dependency injection)
 
 ### 2. Configure Environment
 
@@ -49,51 +49,15 @@ You should see the help message with all available options.
 
 ## Usage Examples
 
-### Example 1: Interactive Mode (Easiest)
-
 ```bash
-./bin/cherry-picker --interactive
-```
-
-Follow the prompts:
-1. Enter Jira ticket number (e.g., `PROJ-123`)
-2. The tool fetches ticket details automatically
-3. Enter commit hashes (space-separated)
-4. Select cherry-pick type
-5. Review and confirm
-
-### Example 2: Quick Non-Interactive
-
-```bash
-./bin/cherry-picker \
-  --ticket=PROJ-123 \
-  --fix-version=12.0.1 \
-  --commits="abc123def def456abc"
-```
-
-This will:
-- Cherry-pick commits `abc123def` and `def456abc`
-- Target branch: `hotfix/12.0.1` or `release/12.0.1`
-- Auto-generate branch name: `proj-123-cherry-pick-12-0-1`
-- Create merge request with reviewer
-
-### Example 3: Custom Branch and Title
-
-```bash
-./bin/cherry-picker \
-  --ticket=PROJ-456 \
-  --fix-version=11.5.0 \
-  --commits="xyz789" \
-  --branch=proj-456-urgent-fix \
-  --title="[PROJ-456] Urgent security fix for v11.5.0"
+./bin/cherry-picker
 ```
 
 ## What Happens During Execution?
 
 1. **Preparation**
-   - Configures git user name/email
+   - (Optional - turned off by default), Configures git user-name/email, remote origin
    - Stashes current changes
-   - Sets up remote with authentication
 
 2. **Branch Operations**
    - Pulls latest from target branch (fix version)
@@ -106,15 +70,15 @@ This will:
 
 4. **Conflict Resolution** (if needed)
    - Tool pauses and shows conflict message
-   - You resolve conflicts in your editor
+   - You resolve conflicts in your editor, SAVE FILES BUT DON'T ADD TO STAGE OR COMMIT THEM !!!!
    - Press Enter to continue
-   - Tool stages changes and continues
+   - Tool stages changes, commits and continues
 
 5. **Finalization**
    - Pushes new branch to remote
    - Creates merge request in GitLab
    - Assigns reviewer
-   - Returns to original branch
+   - Returns to original branch in your local computer's git
    - Cleans up local cherry-pick branch
    - Restores stashed changes
 
@@ -123,12 +87,6 @@ This will:
 ### "Composer autoloader not found"
 ```bash
 composer install
-```
-
-### "No .env file found"
-```bash
-cp env.example .env
-# Edit .env with your credentials
 ```
 
 ### "Failed to connect to GitLab/Jira"
@@ -144,7 +102,7 @@ chmod +x bin/cherry-picker
 ### Conflicts During Cherry-Pick
 1. The tool will pause and show: "Please resolve the conflicts manually..."
 2. Open the conflicted files in your editor
-3. Resolve the conflict markers (<<<<<<, ======, >>>>>>)
+3. Resolve the conflicts
 4. Save the files
 5. Return to terminal and press Enter
 6. The tool continues automatically
@@ -160,33 +118,22 @@ cherry-picker/
 │   ├── Container.php          # Dependency injection container
 │   ├── Config/
 │   │   └── ConfigLoader.php   # Configuration management
+|   |     └── cherry-picker.php  # Default configuration
 │   ├── Clients/
-│   │   ├── GitClient.php      # Git operations
-│   │   ├── GitLabClient.php   # GitLab API client
 │   │   ├── JiraClient.php     # Jira API client
-│   │   └── ShellRunner.php    # Shell command execution
+|   |   |      ...........................
 │   ├── Contracts/
-│   │   └── VCSProviderContract.php  # VCS interface
 │   ├── DataTransferObjects/
-│   │   └── CherryPickDTO.php  # Data transfer object
-│   └── config/
-│       └── cherry-picker.php  # Default configuration
-├── vendor/                     # Dependencies (after composer install)
-├── .env                        # Your configuration (create from env.example)
 ├── env.example                 # Example configuration
 └── composer.json               # Package definition
 ```
 
 ## Next Steps
 
-1. Run `composer install`
-2. Configure your `.env` file
-3. Try interactive mode: `./bin/cherry-picker --interactive`
-4. Read the full [README.md](README.md) for more details
+Read the full [README.md](README.md) for more details
 
 ## Support
 
 For issues, please check:
 - [README.md](README.md) - Full documentation
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
-- GitHub Issues - Report bugs or request features

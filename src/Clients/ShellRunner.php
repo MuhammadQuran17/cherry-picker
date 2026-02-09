@@ -9,7 +9,7 @@ class ShellRunner
 {
     public function run(string $command): void
     {
-        $process = Process::fromShellCommandline('cd ' . config('cherry-picker.git.path_to_root_folder') . ' && ' . $command);
+        $process = Process::fromShellCommandline($this->goToRootFolder() . $command);
         $process->setTimeout(240);
         
         $process->run(function ($type, $buffer) {
@@ -23,10 +23,21 @@ class ShellRunner
 
     public function runWithoutOutputAndError(string $command): array
     {
-        $process = Process::fromShellCommandline('cd ' . config('cherry-picker.git.path_to_root_folder') . ' && ' . $command);
+        $process = Process::fromShellCommandline($this->goToRootFolder() . $command);
         $process->setTimeout(240);
         $process->run();
 
         return [ 'exit_code' => $process->getExitCode(), 'error_output' => $process->getErrorOutput()];
     }
+
+    public function runShellExec(string $command): string
+    {
+        return trim(shell_exec($this->goToRootFolder() . $command));
+    }
+
+    private function goToRootFolder(): string
+    {
+        return 'cd ' . config('cherry-picker.git.path_to_root_folder') . ' && ';
+    }
+
 }

@@ -25,64 +25,7 @@ Language agnostic package for automated Git cherry-picking with WMT (Work Manage
 
 ## Installation
 
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/MuhammadQuran17/cherry-picker.git
-cd cherry-picker
-composer install
-```
-
-## Configuration
-
-1. Copy the example environment file:
-
-```bash
-cp env.example .env
-```
-
-2. Edit `.env` with your credentials:
-
-```env
-# Git Configuration
-GIT_USERNAME=your.git.username
-GIT_EMAIL=your.email@example.com
-MR_REVIEWER_NAME=reviewer.username
-
-# GitLab Configuration
-PERSONAL_TOKEN=your-gitlab-personal-access-token
-GITLAB_API_URL=https://gitlab.da.local/api/v4
-
-# Jira Configuration
-JIRA_EMAIL=your.jira.email@example.com
-JIRA_TOKEN=your-jira-personal-access-token
-JIRA_API_URL=https://your-company.atlassian.net/rest/api/3
-```
-
-## Usage
-
-### Interactive Mode
-
-Run the CLI tool locally in interactive mode with beautiful prompts:
-
-```bash
-./bin/cherry-picker 
-```
-
-The interactive mode will:
-- Prompt for Jira ticket number
-- Automatically fetch ticket details (summary, fix version, issue type)
-- Generate branch name and MR title automatically
-- Create MR for cherry-pick
-
-### Conflict Resolution
-
-If conflicts occur during cherry-picking, the tool will pause and prompt you to:
-1. Resolve conflicts manually in your editor
-2. Save the resolved files (NO need to add to stage, commit and push, we will do it automatically)
-3. Press Enter to continue
-
-The tool will then automatically stage the changes, commit, and continue the cherry-pick process.
+Please read [QUICKSTART.md](QUICKSTART.md)
 
 ## Architecture
 

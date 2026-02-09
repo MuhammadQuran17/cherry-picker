@@ -37,8 +37,8 @@ class CherryPicker
             $this->shell->run("git fetch origin");
             $result = $this->shell->runWithoutOutputAndError("git cherry-pick -x $dto->commitHashes");  // cherry-picking
 
-            if ($result['exit_code'] !== 0 && str_contains($result['error_output'], 'CONFLICT')) {
-                warning('A merge conflict occurred!');
+            if ($result['exit_code'] !== 0) {
+                warning("A merge conflict occurred! \n\n EXIT CODE: {$result['exit_code']}");
 
                 $this->conflictResolution();
             }

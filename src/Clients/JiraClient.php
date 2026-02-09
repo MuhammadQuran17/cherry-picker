@@ -41,7 +41,7 @@ class JiraClient implements WMTProviderContract
 
         return match ($type) {
             'Task' => 'feature',
-            'Bug'  => 'bug',
+            'Bug'  => 'bugfix',
             default => throw new Exception("Unknown issue type: {$type}. Is it feature or bug? (If you know, then just hardcode by yourself)"),
         };
     }

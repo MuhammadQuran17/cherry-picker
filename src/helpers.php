@@ -77,3 +77,19 @@ if (!function_exists('data_get')) {
         return $array;
     }
 }
+
+if (!function_exists('dd')) {
+    /**
+     * Dump the given variables and end the script (Laravel-style)
+     *
+     * @param mixed ...$vars Variables to dump
+     * @return never
+     */
+    function dd(mixed ...$vars): never
+    {
+        foreach ($vars as $var) {
+            var_dump($var);
+        }
+        exit(1);
+    }
+}
