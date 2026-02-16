@@ -107,27 +107,6 @@ chmod +x bin/cherry-picker
 5. Return to terminal and press Enter
 6. The tool continues automatically
 
-## Directory Structure
-
-```
-cherry-picker/
-├── bin/
-│   └── cherry-picker          # Executable CLI script
-├── src/
-│   ├── CherryPicker.php       # Main orchestrator
-│   ├── Container.php          # Dependency injection container
-│   ├── Config/
-│   │   └── ConfigLoader.php   # Configuration management
-|   |     └── cherry-picker.php  # Default configuration
-│   ├── Clients/
-│   │   ├── JiraClient.php     # Jira API client
-|   |   |      ...........................
-│   ├── Contracts/
-│   ├── DataTransferObjects/
-├── env.example                 # Example configuration
-└── composer.json               # Package definition
-```
-
 ## Next Steps
 
 Read the full [README.md](README.md) for more details
