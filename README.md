@@ -1,7 +1,5 @@
 # Auto Git Cherry Picker with WMT (Jira) and VCS (GitLab) integrations
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mu/cherry-picker.svg?style=flat-square)](https://packagist.org/packages/mu/cherry-picker)
-[![Total Downloads](https://img.shields.io/packagist/dt/mu/cherry-picker.svg?style=flat-square)](https://packagist.org/packages/mu/cherry-picker)
 ![GitHub Actions](https://github.com/MuhammadQuran17/cherry-picker/actions/workflows/main.yml/badge.svg)
 
 A language-agnostic package for automated Git cherry-picking with WMT (Work Management Tool – Jira) and VCS (Version Control System – GitLab) integrations for team workflows. It is useful for backporting changes to multiple branches, cloning fixes, or propagating features to separate projects. It is especially valuable for teams that perform a large number of manual cherry-picks.
@@ -98,6 +96,12 @@ Run tests in CLI (need to install dev dependencies with `composer install --dev`
 ```bash
 ./vendor/bin/pest
 ```
+
+---
+
+Also check our Agent Chat UI Starter kit: https://agenytics.com
+
+---
 
 ### Changelog
 
