@@ -98,10 +98,9 @@ Run tests in CLI (need to install dev dependencies with `composer install --dev`
 ```
 
 ---
-
-Also check our Agent Chat UI Starter kit: https://agenytics.com
-
+### Also check our Agent Chat UI Starter kit: https://agenytics.com
 ---
+
 
 ### Changelog
 
